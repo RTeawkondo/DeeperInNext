@@ -1,4 +1,5 @@
 import MeetupList from "@/components/meetups/MeetupList";
+import { useEffect, useState } from "react";
 
 const DUMMY_MEETUPS = [
     {
@@ -17,10 +18,22 @@ const DUMMY_MEETUPS = [
     },
 ]
 
-export default function HomePage() {
+export default function HomePage(props) {
   return (
     <>
-    <MeetupList meetups={DUMMY_MEETUPS}/>
+    <MeetupList meetups={props.meetups}/>
     </>
   )
 }
+
+export async function getStaticProps() {
+    // Call an external API endpoint to get posts.
+    // You can use any data fetching library
+    // By returning { props: { posts } }, the Blog component
+    // will receive `posts` as a prop at build time
+    return {
+      props: {
+        meetups: DUMMY_MEETUPS
+      },
+    }
+  }
