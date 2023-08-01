@@ -19,6 +19,7 @@ const DUMMY_MEETUPS = [
 ]
 
 export default function HomePage(props) {
+
   return (
     <>
     <MeetupList meetups={props.meetups}/>
@@ -42,3 +43,18 @@ export async function getStaticProps() {
     //like above it's take 10s after have a request to server that server rendering
     // for a SSG(static site generation) you must be redeploy every time data update without this values
   }
+
+// export async function getServerSideProps(context){
+//     const req = context.req
+//     const res = context.res
+//     // won't run during the build process
+//     //but always on the server after deployment
+//     // code here always run on the server, server only
+//     //this function run for any request come to server
+//     //serversideprops is slower than staticprops
+//     return {
+//         props:{
+//             meetups: DUMMY_MEETUPS
+//         }
+//     }
+// }
