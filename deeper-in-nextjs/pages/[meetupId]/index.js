@@ -1,9 +1,8 @@
-import React from 'react'
+import MeetupDetail from "@/components/meetups/MeetupDetail";
+import React from "react";
 
-export default function DetailPage() {
+export default function MeetupDetails() {
   return (
-    <>
-        <h1>DetailPage</h1>
-    </>
-  )
+    <MeetupDetail image="" address ="hehe" title="hoho" description="hihi"/>
+  );
 }
