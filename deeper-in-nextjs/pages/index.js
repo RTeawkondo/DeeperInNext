@@ -35,5 +35,10 @@ export async function getStaticProps() {
       props: {
         meetups: DUMMY_MEETUPS
       },
+      revalidate: 10
     }
+    //revalidate: unlock increment Static Generation, receive number
+    //as second that page will re-generate on sever
+    //like above it's take 10s after have a request to server that server rendering
+    // for a SSG(static site generation) you must be redeploy every time data update without this values
   }
