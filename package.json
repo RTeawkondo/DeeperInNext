@@ -10,6 +10,8 @@
   "dependencies": {
     "next": "10.0.6",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "postcss": "^8.4.27",
+    "mongodb": "^5.7.0",
   }
 }
