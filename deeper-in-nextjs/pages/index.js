@@ -1,27 +1,17 @@
 import MeetupList from "@/components/meetups/MeetupList";
+import { MongoClient } from "mongodb";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 
-const DUMMY_MEETUPS = [
-    {
-        id: "m1",
-        title: "hehe",
-        image: "https://learnopencv.com/wp-content/uploads/2021/04/image-15.png",
-        address: "hohogegeheeheahha",
-        description: "heeeeeeeeeeeeee"
-    },
-    {
-        id: "m2",
-        title: "hehe2",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvj2_Ocg29zF6vz2IepBqxucvDSYO_72zqSw&usqp=CAU",
-        address: "hohogegeheeheahha2",
-        description: "heeeeeeeeeeeeee2"
-    },
-]
 
 export default function HomePage(props) {
 
   return (
     <>
+    <Head>
+      <title>First Test hehe</title>
+      <meta name="description" content="hehe"/>
+    </Head>
     <MeetupList meetups={props.meetups}/>
     </>
   )
@@ -32,9 +22,22 @@ export async function getStaticProps() {
     // You can use any data fetching library
     // By returning { props: { posts } }, the Blog component
     // will receive `posts` as a prop at build time
+
+    const client = await MongoClient.connect("mongodb+srv://admin:6hy3BsRwMH9cRZUL@cluster0.3dcw6kq.mongodb.net/meetups?retryWrites=true&w=majority")
+    const db = client.db()
+
+    const meetupsCollection = db.collection("meetups")
+    const meetups = await meetupsCollection.find().toArray()
+    client.close()
+
     return {
       props: {
-        meetups: DUMMY_MEETUPS
+        meetups: meetups.map(meetup => ({
+          title: meetup.title,
+          address: meetup.address,
+          image: meetup.image,
+          id: meetup._id.toString()
+        }))
       },
       revalidate: 10
     }
