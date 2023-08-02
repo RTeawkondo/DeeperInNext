@@ -35,8 +35,10 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    fallback: false, // false, value out off path below will return 404
+    fallback: "blocking", // false, value out off path below will return 404
     //true: nextjs will try to generate a page for miss path
+    //true: immediately return an empty
+    //blocking: the user will not see anything until pre-generate finished
     paths: meetups.map((meetup) => ({
       params: {
         meetupId: meetup._id.toString(),
